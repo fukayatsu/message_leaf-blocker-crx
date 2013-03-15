@@ -2,7 +2,11 @@ chrome.extension.sendRequest({
   method: "getSetting"
 }, function(response) {
   var setting = response.setting;
-  if (setting && setting.disable) {return;}
-
-  $('#msglf-slide').remove();
+  if (setting.active) {
+    $('#msglf-slide').remove();
+    chrome.extension.sendRequest({
+      method: "setBadgeColor",
+      color: [255, 51, 255, 255]
+    });
+  }
 });
